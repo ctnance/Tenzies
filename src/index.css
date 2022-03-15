@@ -1,7 +1,10 @@
 :root {
+  --medium-blue: #5035ff;
   --dark-blue: #0b2434;
-  --white: #f5f5f5;
+  --green: #59e391;
   --font-dark: #2b283a;
+  --white: #fff;
+  --off-white: #f5f5f5;
 }
 
 body {
@@ -22,9 +25,9 @@ body {
 main {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  background-color: var(--white);
+  background-color: var(--off-white);
   border-radius: 0.75em;
   height: 100%;
   padding: 2em;
@@ -42,12 +45,35 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--font-dark);
   border-radius: 4px;
   box-shadow: 0px 2px 2px #00000026;
-  font-size: 1.25rem;
-  font-weight: bold;
   width: 50px;
   height: 50px;
   padding: 1em;
+}
+
+.die-locked {
+  background-color: var(--green);
+}
+
+.die-number {
+  color: var(--font-dark);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.roll-dice-btn {
+  background-color: var(--medium-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 1em;
+  padding: 1em 1.5em;
+  transition: box-shadow 0.05s;
+}
+
+.roll-dice-btn:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
