@@ -9,14 +9,18 @@ export default function Main() {
     return Math.ceil(Math.random() * 6);
   }
 
+  function generateNewDie(id) {
+    return {
+      id: id,
+      value: getRandomDieNum(),
+      isLocked: false,
+    };
+  }
+
   function generateNewDice() {
     let dice = [];
     for (let i = 0; i < 10; i++) {
-      dice.push({
-        id: i,
-        value: getRandomDieNum(),
-        isLocked: false,
-      });
+      dice.push(generateNewDie(i));
     }
     return dice;
   }
@@ -27,12 +31,7 @@ export default function Main() {
     } else {
       setDice((prevDice) => {
         return prevDice.map((die) => {
-          return die.isLocked
-            ? die
-            : {
-                ...die,
-                value: getRandomDieNum(),
-              };
+          return die.isLocked ? die : generateNewDie(die.id);
         });
       });
     }
@@ -59,6 +58,11 @@ export default function Main() {
 
   return (
     <main>
+      <h1 className="title">Tenzies</h1>
+      <p className="instructions">
+        Roll until all dice are the same. Click each die to freeze it at its current
+        value between rolls.
+      </p>
       <div className="dice-container">{diceElements}</div>
       <RollButton rollDice={rollDice} />
     </main>
