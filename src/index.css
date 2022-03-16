@@ -42,6 +42,7 @@ main {
 
 .instructions {
   font-size: 1.25rem;
+  text-align: center;
   margin: 2em 0 3em;
 }
 
@@ -58,6 +59,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
   border-radius: 4px;
   box-shadow: 0px 2px 2px #00000026;
   width: 50px;
