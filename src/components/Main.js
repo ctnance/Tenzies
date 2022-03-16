@@ -5,22 +5,43 @@ import RollButton from "./RollButton";
 export default function Main() {
   let [dice, setDice] = React.useState(generateNewDice());
 
+  function getRandomDieNum() {
+    return Math.ceil(Math.random() * 6);
+  }
+
   function generateNewDice() {
     let dice = [];
     for (let i = 0; i < 10; i++) {
       dice.push({
         id: i,
-        value: Math.ceil(Math.random() * 6),
+        value: getRandomDieNum(),
         isLocked: false,
       });
     }
     return dice;
   }
 
-  function toggleLocked(event, id) {
+  function rollDice() {
+    if (dice.length === 0) {
+      setDice(generateNewDice());
+    } else {
+      setDice((prevDice) => {
+        return prevDice.map((die) => {
+          return die.isLocked
+            ? die
+            : {
+                ...die,
+                value: getRandomDieNum(),
+              };
+        });
+      });
+    }
+    console.log(dice);
+  }
+
+  function lockDie(id) {
     setDice((prevDice) => {
       return prevDice.map((die) => {
-        console.log(die.id === id);
         return die.id === id ? { ...die, isLocked: !die.isLocked } : die;
       });
     });
@@ -32,17 +53,14 @@ export default function Main() {
       id={die.id}
       value={die.value}
       isLocked={die.isLocked}
-      toggleLocked={toggleLocked}
+      lockDie={() => lockDie(die.id)}
     />
   ));
 
-  function rerollDice() {
-    setDice(generateNewDice());
-  }
   return (
     <main>
       <div className="dice-container">{diceElements}</div>
-      <RollButton rerollDice={rerollDice} />
+      <RollButton rollDice={rollDice} />
     </main>
   );
 }
